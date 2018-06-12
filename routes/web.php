@@ -17,4 +17,7 @@ Route::group([], function () {
 
 	Route::get('/{id}/{slug}', 'HomeController@detailNews')
 			->name('news.detail');
+
+	Route::get('/kompas-list', 'HomeController@kompasList')
+			->name('crawler.kompas');
 });

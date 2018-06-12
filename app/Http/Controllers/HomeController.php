@@ -16,7 +16,7 @@ class HomeController extends Controller
             'route'         => 'home'
         ];
 
-        $newsList = NewsPost::orderBy('date_publish', 'desc')->paginate(env('PAGINATION', 15));
+        $newsList = NewsPost::orderBy('date_publish', 'desc')->simplePaginate(env('PAGINATION', 15));
 
         return view('home.home', 
             compact(
@@ -52,5 +52,9 @@ class HomeController extends Controller
                 'seo',
                 'news'
             ));
+    }
+
+    public function kompasList(){
+        return 'kompas list';
     }
 }

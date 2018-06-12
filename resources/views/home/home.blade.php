@@ -37,14 +37,14 @@
                         &nbsp;
                         <a href="#" class="btn btn-default btn-xs">
                             <span class="glyphicon glyphicon-calendar" aria-hidden="true" title="date pusblish"></span>
-                            &nbsp;{{date('dM H:i',strtotime($news->date_publish))}} WIB
+                            &nbsp;{{date('dM Y, H:i',strtotime($news->date_publish))}} WIB
                         </a>
                     </div>
                 </div>
             </div>
             @endforeach
 
-            <div class="">
+            <div class="text-center">
                 {{ $newsList->links() }}
             </div>
         </div>
