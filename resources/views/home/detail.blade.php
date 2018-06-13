@@ -7,9 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h2 class="title-list">
-                        <a href="{{route('news.detail', [$news->id, str_slug($news->title)])}}">
-                            {{$news->title}}
-                        </a>
+                        {{$news->title}}
                     </h2>
                 </div>
 
@@ -40,17 +38,26 @@
                         </a>
                     </div>
 
-                    @if(!$news->scrap_status)
-                        <div class="detail-redirect text-center">
-                            <p>
-                                will be redirect to source ...<br>
-                                klik <a href="{{$news->link_news}}?UTM_MEDIUM=newsfeed.website">here</a> if not
-                            </p>
-                        </div>
-                    @endif
+                    
 
-                    <div>
+                    <div class="detail-redirect">
+                        @if($news->image_link != '')
+                            <img src="{{$news->image_link}}" alt="{{$news->image_link_alt}}" class="img-responsive">
+                            <hr>
+                        @endif
                         {!!$news->content!!}
+                    </div>
+
+                    <div class="detail-redirect text-center">
+                        <p> 
+                            @if(!$news->scrap_status)
+                                will be redirect to source in 5seconds ...<br>
+                                klik <a href="{{$news->link_news}}??source=newsfeed.website&utm_source=newsfeed.website&utm_medium=jobs-posting&utm_campaign=jobs-posting">here</a> if not
+                            @else
+                                Source link:<br>
+                                klik <a href="{{$news->link_news}}??source=newsfeed.website&utm_source=newsfeed.website&utm_medium=jobs-posting&utm_campaign=jobs-posting">here</a>
+                            @endif
+                        </p>
                     </div>
                 </div>
             </div>
@@ -66,7 +73,7 @@
         $( document ).ready(function() {
             setTimeout(function(){
                 window.location = '{{$news->link_news}}?UTM_MEDIUM=newsfeed.website';
-            }, 4000);
+            }, 5000);
         });
     </script>
 @endif
