@@ -4,6 +4,10 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
+
+use App\Http\Controllers\HomeController;
+
 
 class Kernel extends ConsoleKernel
 {
@@ -24,9 +28,19 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->call(function () {
-        //     DB::table('recent_users')->delete();
-        // })->daily();
+        $schedule->call(function () {
+            $crawler = new HomeController();
+            $result = $crawler->doCrawlerCron();
+
+            Log::info($result);
+        })->hourly();
+
+        $schedule->call(function () {
+            $crawler = new HomeController();
+            $result = $crawler->doCrawlerDetail();
+
+            Log::info($result);
+        })->hourly();
     }
 
     /**

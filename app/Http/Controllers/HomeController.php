@@ -73,8 +73,37 @@ class HomeController extends Controller
         return json_encode($result);
     }
 
+    public function doCrawlerCron(){
+        $date = date('Y-m-d');
+
+        $result = [];
+        $result['date_crawler'] = $date;
+
+        $responseKompas = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/kompas/list?date=' . $date);
+        $result['kompas'] = json_decode($responseKompas->body);
+
+        // bln/tgl/thn
+        $dateDetik = date('m/d/Y', strtotime($date));
+        $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/list?date=' . $dateDetik);
+        $result['detik'] = json_decode($responseDetik->body);
+
+        return json_encode($result);
+    }
+
     public function doCrawlerDetail(Request $request){
         $limit = $request->input('limit', 20);
+
+        $result = [];
+        $result['limit'] = $limit;
+
+        $responseKompas = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/kompas/detail?limit=' . $limit);
+        $result['kompas'] = json_decode($responseKompas->body);
+
+        return json_encode($result);
+    }
+
+    public function doCrawlerDetail(){
+        $limit = 400;
 
         $result = [];
         $result['limit'] = $limit;
