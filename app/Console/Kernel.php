@@ -33,11 +33,11 @@ class Kernel extends ConsoleKernel
             $result = $crawler->doCrawlerCron();
 
             Log::info($result);
-        })->hourly();
+        })->everyThirtyMinutes();
 
         $schedule->call(function () {
             $crawler = new HomeController();
-            $result = $crawler->doCrawlerDetail();
+            $result = $crawler->doCrawlerDetailCron();
 
             Log::info($result);
         })->hourly();

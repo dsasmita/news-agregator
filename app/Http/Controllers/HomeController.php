@@ -102,7 +102,7 @@ class HomeController extends Controller
         return json_encode($result);
     }
 
-    public function doCrawlerDetail(){
+    public function doCrawlerDetailCron(){
         $limit = 400;
 
         $result = [];
