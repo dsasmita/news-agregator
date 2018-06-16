@@ -99,8 +99,13 @@ class HomeController extends Controller
         $responseKompas = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/kompas/detail?limit=' . $limit);
         $result['kompas'] = json_decode($responseKompas->body);
 
+        // crawler content type
+        $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/news-type?limit=' . $limit);
+        $result['detik_content_type'] = json_decode($responseKompas->body);
+
+        // crawler detail
         // singlepagenews
-        $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/kompas/detail/singlepagenews?limit=' . $limit);
+        $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/detail/singlepagenews?limit=' . $limit);
         $result['detik_singlepagenews'] = json_decode($responseKompas->body);
 
         return json_encode($result);
