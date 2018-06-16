@@ -101,12 +101,12 @@ class HomeController extends Controller
 
         // crawler content type
         $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/news-type?limit=' . $limit);
-        $result['detik_content_type'] = json_decode($responseKompas->body);
+        $result['detik_content_type'] = json_decode($responseDetik->body);
 
         // crawler detail
         // singlepagenews
         $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/detail/singlepagenews?limit=' . $limit);
-        $result['detik_singlepagenews'] = json_decode($responseKompas->body);
+        $result['detik_singlepagenews'] = json_decode($responseDetik->body);
 
         return json_encode($result);
     }
@@ -122,12 +122,12 @@ class HomeController extends Controller
 
         // crawler content type
         $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/news-type?limit=' . $limit);
-        $result['detik_content_type'] = json_decode($responseKompas->body);
+        $result['detik_content_type'] = json_decode($responseDetik->body);
 
         // crawler detail
         // singlepagenews
-        $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/detail/singlepagenews?limit=' . $limit);
-        $result['detik_singlepagenews'] = json_decode($responseKompas->body);
+        $responseDetikSingle = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/detail/singlepagenews?limit=' . $limit);
+        $result['detik_singlepagenews'] = json_decode($responseDetikSingle->body);
 
         return json_encode($result);
     }
