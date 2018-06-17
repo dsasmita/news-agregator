@@ -8,7 +8,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h2 class="title-list">
-                        <a href="{{route('news.detail', [$news->id, str_slug($news->title)])}}">
+                        <a href="{{route('news.detail', [$news->id, str_slug($news->title)])}}" target="_blank">
                             {{$news->title}}
                         </a>
                     </h2>
@@ -16,11 +16,6 @@
 
                 <div class="panel-body">
                     <div class="list-info">
-                        <a href="#" class="btn btn-default btn-xs hidden">
-                            <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
-                            share
-                        </a>
-
                         @if($news->portal()->first())
                             <a href="#" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-magnet" aria-hidden="true" title="date pusblish"></span>
