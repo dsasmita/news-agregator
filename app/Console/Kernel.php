@@ -28,19 +28,19 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->call(function () {
-        //     $crawler = new HomeController();
-        //     $result = $crawler->doCrawlerCron();
+        $schedule->call(function () {
+            $crawler = new HomeController();
+            $result = $crawler->doCrawlerCron();
 
-        //     Log::info($result);
-        // })->everyThirtyMinutes();
+            Log::info($result);
+        })->twiceDaily(1, 13);
 
-        // $schedule->call(function () {
-        //     $crawler = new HomeController();
-        //     $result = $crawler->doCrawlerDetailCron();
+        $schedule->call(function () {
+            $crawler = new HomeController();
+            $result = $crawler->doCrawlerDetailCron();
 
-        //     Log::info($result);
-        // })->hourly();
+            Log::info($result);
+        })->twiceDaily(1, 13);
     }
 
     /**
