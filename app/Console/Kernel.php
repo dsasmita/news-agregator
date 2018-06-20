@@ -31,16 +31,12 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $crawler = new HomeController();
             $result = $crawler->doCrawlerCron();
-
-            Log::info($result);
-        })->twiceDaily(1, 13);
+        })->twiceDaily(1, 23);
 
         $schedule->call(function () {
             $crawler = new HomeController();
             $result = $crawler->doCrawlerDetailCron();
-
-            Log::info($result);
-        })->twiceDaily(1, 13);
+        })->twiceDaily(1, 23);
     }
 
     /**
