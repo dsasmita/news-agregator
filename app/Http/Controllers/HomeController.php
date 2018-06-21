@@ -62,13 +62,23 @@ class HomeController extends Controller
         $result = [];
         $result['date_crawler'] = $date;
 
-        $responseKompas = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/kompas/list?date=' . $date);
-        $result['kompas'] = json_decode($responseKompas->body);
+        try {
+            $responseKompas = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/kompas/list?date=' . $date);
+            $result['kompas'] = json_decode($responseKompas->body);
+        } catch (Exception $e) {
+            
+        }
 
-        // bln/tgl/thn
-        $dateDetik = date('m/d/Y', strtotime($date));
-        $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/list?date=' . $dateDetik);
-        $result['detik'] = json_decode($responseDetik->body);
+        try {
+            // bln/tgl/thn
+            $dateDetik = date('m/d/Y', strtotime($date));
+            $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/list?date=' . $dateDetik);
+            $result['detik'] = json_decode($responseDetik->body);
+        } catch (Exception $e) {
+            
+        }
+
+        
 
         return json_encode($result);
     }
