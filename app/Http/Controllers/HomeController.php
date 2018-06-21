@@ -78,8 +78,6 @@ class HomeController extends Controller
             
         }
 
-        
-
         return json_encode($result);
     }
 
@@ -89,13 +87,23 @@ class HomeController extends Controller
         $result = [];
         $result['date_crawler'] = $date;
 
-        $responseKompas = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/kompas/list?date=' . $date);
-        $result['kompas'] = json_decode($responseKompas->body);
+        try {
+            $responseKompas = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/kompas/list?date=' . $date);
+            $result['kompas'] = json_decode($responseKompas->body);
+        } catch (Exception $e) {
+            
+        }
 
-        // bln/tgl/thn
-        $dateDetik = date('m/d/Y', strtotime($date));
-        $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/list?date=' . $dateDetik);
-        $result['detik'] = json_decode($responseDetik->body);
+        
+        try {
+            // bln/tgl/thn
+            $dateDetik = date('m/d/Y', strtotime($date));
+            $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/list?date=' . $dateDetik);
+            $result['detik'] = json_decode($responseDetik->body);
+        } catch (Exception $e) {
+            
+        }
+        
 
         return json_encode($result);
     }
@@ -106,17 +114,29 @@ class HomeController extends Controller
         $result = [];
         $result['limit'] = $limit;
 
-        $responseKompas = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/kompas/detail?limit=' . $limit);
-        $result['kompas'] = json_decode($responseKompas->body);
+        try {
+            $responseKompas = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/kompas/detail?limit=' . $limit);
+            $result['kompas'] = json_decode($responseKompas->body);
+        } catch (Exception $e) {
+            
+        }
+        
+        try {
+            // crawler content type
+            $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/news-type?limit=' . $limit);
+            $result['detik_content_type'] = json_decode($responseDetik->body);    
+        } catch (Exception $e) {
+            
+        }
 
-        // crawler content type
-        $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/news-type?limit=' . $limit);
-        $result['detik_content_type'] = json_decode($responseDetik->body);
-
-        // crawler detail
-        // singlepagenews
-        $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/detail/singlepagenews?limit=' . $limit);
-        $result['detik_singlepagenews'] = json_decode($responseDetik->body);
+        try {
+            // crawler detail
+            // singlepagenews
+            $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/detail/singlepagenews?limit=' . $limit);
+            $result['detik_singlepagenews'] = json_decode($responseDetik->body);    
+        } catch (Exception $e) {
+            
+        }
 
         return json_encode($result);
     }
@@ -127,17 +147,29 @@ class HomeController extends Controller
         $result = [];
         $result['limit'] = $limit;
 
-        $responseKompas = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/kompas/detail?limit=' . $limit);
-        $result['kompas'] = json_decode($responseKompas->body);
+        try {
+            $responseKompas = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/kompas/detail?limit=' . $limit);
+            $result['kompas'] = json_decode($responseKompas->body);
+        } catch (Exception $e) {
+            
+        }
+        
+        try {
+            // crawler content type
+            $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/news-type?limit=' . $limit);
+            $result['detik_content_type'] = json_decode($responseDetik->body);    
+        } catch (Exception $e) {
+            
+        }
 
-        // crawler content type
-        $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/news-type?limit=' . $limit);
-        $result['detik_content_type'] = json_decode($responseDetik->body);
-
-        // crawler detail
-        // singlepagenews
-        $responseDetikSingle = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/detail/singlepagenews?limit=' . $limit);
-        $result['detik_singlepagenews'] = json_decode($responseDetikSingle->body);
+        try {
+            // crawler detail
+            // singlepagenews
+            $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/detail/singlepagenews?limit=' . $limit);
+            $result['detik_singlepagenews'] = json_decode($responseDetik->body);    
+        } catch (Exception $e) {
+            
+        }
 
         return json_encode($result);
     }
