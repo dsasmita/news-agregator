@@ -62,20 +62,56 @@ class HomeController extends Controller
         $result = [];
         $result['date_crawler'] = $date;
 
-        try {
-            $responseKompas = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/kompas/list?date=' . $date);
-            $result['kompas'] = json_decode($responseKompas->body);
-        } catch (Exception $e) {
-            
-        }
+        if($request->input('portal') == 'tempo'){
+            try {
+                // 2018/06/21
+                $dateTempo = date('Y/m/d', strtotime($date));
+                $responseTempo = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/tempo/list?date=' . $dateTempo);
+                $result['tempo'] = json_decode($responseDetik->body);
+            } catch (Exception $e) {
+                
+            }
+        }else if($request->input('portal') == 'kompas'){
+            try {
+                $responseKompas = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/kompas/list?date=' . $date);
+                $result['kompas'] = json_decode($responseKompas->body);
+            } catch (Exception $e) {
+                
+            }
+        }else if($request->input('portal') == 'detik'){
+            try {
+                // bln/tgl/thn
+                $dateDetik = date('m/d/Y', strtotime($date));
+                $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/list?date=' . $dateDetik);
+                $result['detik'] = json_decode($responseDetik->body);
+            } catch (Exception $e) {
+                
+            }
+        }else{
+            try {
+                $responseKompas = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/kompas/list?date=' . $date);
+                $result['kompas'] = json_decode($responseKompas->body);
+            } catch (Exception $e) {
+                
+            }
 
-        try {
-            // bln/tgl/thn
-            $dateDetik = date('m/d/Y', strtotime($date));
-            $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/list?date=' . $dateDetik);
-            $result['detik'] = json_decode($responseDetik->body);
-        } catch (Exception $e) {
-            
+            try {
+                // bln/tgl/thn
+                $dateDetik = date('m/d/Y', strtotime($date));
+                $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/list?date=' . $dateDetik);
+                $result['detik'] = json_decode($responseDetik->body);
+            } catch (Exception $e) {
+                
+            }
+
+            try {
+                // 2018/06/21
+                $dateTempo = date('Y/m/d', strtotime($date));
+                $responseTempo = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/tempo/list?date=' . $dateTempo);
+                $result['tempo'] = json_decode($responseDetik->body);
+            } catch (Exception $e) {
+                
+            }
         }
 
         return json_encode($result);
@@ -100,6 +136,15 @@ class HomeController extends Controller
             $dateDetik = date('m/d/Y', strtotime($date));
             $responseDetik = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/detik/list?date=' . $dateDetik);
             $result['detik'] = json_decode($responseDetik->body);
+        } catch (Exception $e) {
+            
+        }
+
+        try {
+            // 2018/06/21
+            $dateTempo = date('Y/m/d', strtotime($date));
+            $responseTempo = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/tempo/list?date=' . $dateTempo);
+            $result['tempo'] = json_decode($responseDetik->body);
         } catch (Exception $e) {
             
         }
