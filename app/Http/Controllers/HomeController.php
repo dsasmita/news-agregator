@@ -108,7 +108,7 @@ class HomeController extends Controller
                 // 2018/06/21
                 $dateTempo = date('Y/m/d', strtotime($date));
                 $responseTempo = cURL::get(env('HOME_CRAWLER', 'http://0.0.0.0:8000/') . 'crawler/tempo/list?date=' . $dateTempo);
-                $result['tempo'] = json_decode($responseDetik->body);
+                $result['tempo'] = json_decode($responseTempo->body);
             } catch (Exception $e) {
                 
             }
