@@ -2,8 +2,9 @@
 
 namespace App\Helpers;
 
-use App\models\NewsPost;
-use App\models\Portal;
+use App\Models\NewsPost;
+use App\Models\NewsKanal;
+use App\Models\Portal;
 
 class HelperData{
 
@@ -34,6 +35,24 @@ class HelperData{
 		}
 
 		return implode('&', $tmp);
+	}
+
+	public static function kanal2Filter($kanalList){
+		if(!$kanalList){
+			return false;
+		}
+
+		$tmp = [];
+		foreach ($kanalList as $key => $value) {
+			$kanal = NewsKanal::where('slug', $value)->first();
+			if($kanal){
+				$tmp[] = $kanal->title;
+			}else{
+				$tmp[] = $value;
+			}
+		}
+
+		return implode(', ', $tmp);
 	}
 
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\NewsPost;
 use App\Models\Portal;
 
+use HelperData;
 use cURL;
 
 class HomeController extends Controller
@@ -46,6 +47,14 @@ class HomeController extends Controller
         ];
 
         $kanals = $request->input('kanal');
+        $filterKanal = HelperData::kanal2Filter($kanals);
+        
+        if($filterKanal){
+            $filter = 'Portal News: ' . $portal->title . 
+                        ' - Kanal: '. $filterKanal;
+        }else{
+            $filter = 'Portal News: ' . $portal->title;
+        }
 
         $newsList = NewsPost::where('id_portal', $portal->id)
                                 ->where(function($query) use ($kanals){
@@ -56,8 +65,6 @@ class HomeController extends Controller
                                     }
                                 })->orderBy('date_publish', 'desc')
                                 ->simplePaginate(env('PAGINATION', 15));
-
-        $filter = 'Portal News: ' . $portal->title;
 
         return view('home.home', 
             compact(
