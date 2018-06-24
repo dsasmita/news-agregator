@@ -43,6 +43,7 @@
                 {{ $newsList->links() }}
             </div>
         </div>
+        @include('layouts.general-stat')
     </div>
 </div>
 @endsection
