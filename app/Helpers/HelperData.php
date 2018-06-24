@@ -25,4 +25,15 @@ class HelperData{
 		return $data;
 	}
 
+	public static function kanalParam2Link($kanal){
+		$kanalArray = explode(',', $kanal);
+
+		$tmp = [];
+		foreach ($kanalArray as $key => $value) {
+			$tmp[] = 'kanal[]='.trim($value);
+		}
+
+		return implode('&', $tmp);
+	}
+
 }

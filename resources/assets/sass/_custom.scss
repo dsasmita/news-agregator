@@ -26,5 +26,16 @@ h2.title-list{
 }
 
 h1.home-title{
-	margin-top: 0px;	
+	margin-top: 0px;
+	font-size: 22px;	
+}
+
+.list-info .btn-default{
+	border-radius: 0;
+}
+
+@media screen and (max-width: 480px){
+	.list-info .btn-default{
+		margin-top: 5px;
+	}
 }

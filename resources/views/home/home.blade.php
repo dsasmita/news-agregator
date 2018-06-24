@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-7 list-info">
             @if(@$filter != '')
                 <h1 class="home-title">{{$filter}}</h1>
             @endif
@@ -25,13 +25,13 @@
                                 <span class="glyphicon glyphicon-magnet" aria-hidden="true" title="date pusblish"></span>
                                 &nbsp;{{$news->portal()->first()->title}}
                             </a>
-                        @endif
 
-                        &nbsp;
-                        <a href="#" class="btn btn-default btn-xs">
-                            <span class="glyphicon glyphicon-th-large" aria-hidden="true" title="date pusblish"></span>
-                            &nbsp;{{$news->kanal_index}}
-                        </a>
+                            &nbsp;
+                            <a href="{{ route('news.portal', $news->portal()->first()->title) }}?{{ \HelperData::kanalParam2Link($news->kanal_index) }}" class="btn btn-default btn-xs">
+                                <span class="glyphicon glyphicon-th-large" aria-hidden="true" title="date pusblish"></span>
+                                &nbsp;{{$news->kanal_index}}
+                            </a>
+                        @endif
 
                         &nbsp;
                         <a href="#" class="btn btn-default btn-xs">

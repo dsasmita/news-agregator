@@ -45,8 +45,16 @@ class HomeController extends Controller
             'route'         => 'home'
         ];
 
+        $kanals = $request->input('kanal');
+
         $newsList = NewsPost::where('id_portal', $portal->id)
-                                ->orderBy('date_publish', 'desc')
+                                ->where(function($query) use ($kanals){
+                                    if($kanals){
+                                        foreach ($kanals as $key => $value) {
+                                            $query->where('kanal_index', 'like', '%'.$value.'%');
+                                        }
+                                    }
+                                })->orderBy('date_publish', 'desc')
                                 ->simplePaginate(env('PAGINATION', 15));
 
         $filter = 'Portal News: ' . $portal->title;
