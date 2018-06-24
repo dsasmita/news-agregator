@@ -4,6 +4,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-7">
+            @if(@$filter != '')
+                <h1 class="home-title">{{$filter}}</h1>
+            @endif
+
             @foreach($newsList as $news)
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -17,7 +21,7 @@
                 <div class="panel-body">
                     <div class="list-info">
                         @if($news->portal()->first())
-                            <a href="#" class="btn btn-default btn-xs">
+                            <a href="{{ route('news.portal', $news->portal()->first()->title) }}" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-magnet" aria-hidden="true" title="date pusblish"></span>
                                 &nbsp;{{$news->portal()->first()->title}}
                             </a>

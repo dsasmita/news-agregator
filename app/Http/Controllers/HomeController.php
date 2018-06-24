@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\NewsPost;
+use App\Models\Portal;
 
 use cURL;
 
@@ -26,6 +27,39 @@ class HomeController extends Controller
                 'seo',
                 'newsList'
             ));
+    }
+
+    public function portalNews($portalTitle, Request $request){
+        $portal = Portal::where('title', $portalTitle)->first();
+
+        if(!$portal){
+            return 'page not found';
+        }
+
+        $title = 'NewsFeed | Portal ' . $portal->title;
+
+        $seo = [
+            'description'   => '',
+            'keywords'      => '',
+            'body_class'    => '',
+            'route'         => 'home'
+        ];
+
+        $newsList = NewsPost::where('id_portal', $portal->id)
+                                ->orderBy('date_publish', 'desc')
+                                ->simplePaginate(env('PAGINATION', 15));
+
+        $filter = 'Portal News: ' . $portal->title;
+
+        return view('home.home', 
+            compact(
+                'title', 
+                'seo',
+                'newsList',
+                'filter'
+            ));
+
+        return $portal;
     }
 
     public function detailNews($id, $slug, Request $request){

@@ -9,7 +9,7 @@
 		dan link <a href="https://github.com/dsasmita/news-agregator">ini</a> untuk view news.
 	</p>
 	<p>
-		Saat ini situs yang telah masuk dalam list crawler adalah <strong>Detik.com</strong>, <strong>Tempo.co</strong>, <strong>Kompas.com</strong>. 
+		Saat ini situs yang telah masuk dalam list crawler adalah {!! $stat['portal'] !!}. 
 		Dan akan terus berkembang situs portal lainnya. 
 	</p>
 	<p>
