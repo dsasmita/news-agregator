@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 hidden-xs">
             <iframe src="https://pilkada.merdeka.com/quickcount/jawa-timur" width="100%" height="260px" style="border:none;"></iframe>            
         </div>
         <div class="col-md-7 list-info">
