@@ -38,7 +38,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="#">#pilkada2018</a></li>
+                    <li><a href="{{ route('home.pilkada') }}">#pilkada2018</a></li>
                 </ul>
 
                 <form class="navbar-form navbar-left hidden" role="search">
