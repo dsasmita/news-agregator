@@ -77,6 +77,35 @@ class HomeController extends Controller
         return $portal;
     }
 
+    public function dateList($date, Request $request){
+        $check = HelperData::validDate($date);
+
+        if(!$check){
+            return 'page not found';
+        }
+
+        $title = 'NewsFeed | Portal - ' . $date;
+
+        $seo = [
+            'description'   => '',
+            'keywords'      => '',
+            'body_class'    => '',
+            'route'         => 'home'
+        ];
+
+        $newsList = NewsPost::whereDate('date_publish', $date)
+                        ->orderBy('date_publish', 'desc')
+                        ->simplePaginate(env('PAGINATION', 15));
+
+        return view('home.home', 
+            compact(
+                'title', 
+                'seo',
+                'newsList'
+            ));
+    }
+
+
     public function detailNews($id, $slug, Request $request){
         $news = NewsPost::where('id', $id)->first();
 

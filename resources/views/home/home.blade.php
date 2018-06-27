@@ -34,7 +34,7 @@
                         @endif
 
                         &nbsp;
-                        <a href="#" class="btn btn-default btn-xs">
+                        <a href="{{route('news.date', date('Y-m-d', strtotime($news->date_publish)))}}" class="btn btn-default btn-xs">
                             <span class="glyphicon glyphicon-calendar" aria-hidden="true" title="date pusblish"></span>
                             &nbsp;{{date('dM Y, H:i',strtotime($news->date_publish))}} WIB
                         </a>

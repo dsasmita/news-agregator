@@ -18,6 +18,9 @@ Route::group([], function () {
 	Route::get('/portal/{portal}', 'HomeController@portalNews')
 			->name('news.portal');
 
+	Route::get('/date/{date}', 'HomeController@dateList')
+			->name('news.date');
+
 	Route::get('/{id}/{slug}', 'HomeController@detailNews')
 			->name('news.detail');
 
