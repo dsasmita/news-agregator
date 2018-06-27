@@ -15,6 +15,9 @@ Route::group([], function () {
 	Route::get('/', 'HomeController@index')
 			->name('home');
 
+	Route::get('/pilkada', 'HomeController@pilkada')
+			->name('home.pilkada');
+
 	Route::get('/portal/{portal}', 'HomeController@portalNews')
 			->name('news.portal');
 

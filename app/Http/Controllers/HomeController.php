@@ -105,7 +105,6 @@ class HomeController extends Controller
             ));
     }
 
-
     public function detailNews($id, $slug, Request $request){
         $news = NewsPost::where('id', $id)->first();
 
@@ -295,5 +294,28 @@ class HomeController extends Controller
         }
 
         return json_encode($result);
+    }
+
+    public function pilkada(){
+        $title = 'Pilkada 2018 | NewsFeed';
+        $seo = [
+            'description'   => '',
+            'keywords'      => '',
+            'body_class'    => '',
+            'route'         => 'home'
+        ];
+
+        $newsList = NewsPost::where(function($query){
+                                    $query->where('title', 'like', '%quick count%');
+                                    $query->orWhere('title', 'like', '%pilkada%');
+                                    $query->orWhere('title', 'like', '%pilkada%');
+                                })->orderBy('date_publish', 'desc')->simplePaginate(env('PAGINATION', 15));
+
+        return view('home.pilkada', 
+            compact(
+                'title', 
+                'seo',
+                'newsList'
+            ));
     }
 }
